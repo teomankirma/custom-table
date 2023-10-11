@@ -11,6 +11,8 @@ To install the project, follow these steps:
 
 ## Usage
 
+**NOTE:** To request API access for database connection, please contact me via email, as I use environment variables for configuration.
+
 To use the project, run the following command to start the development server: `npm run dev`
 
 This will launch the project and make it accessible for testing and development.
