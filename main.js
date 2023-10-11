@@ -8,15 +8,15 @@ import { clearInputFields } from "./scripts/clearInputFields";
 import { showMessage } from "./scripts/showMessage";
 
 // Get data from Firebase
-const starCountRef = ref(database, "users/");
-onValue(starCountRef, (snapshot) => {
+const userDataRef = ref(database, "users/");
+onValue(userDataRef, (snapshot) => {
   const data = snapshot.val();
   renderTable(data);
 });
 
 // Render HTML
 document.querySelector("#app").innerHTML = `
-<div class="container">
+  <div class="container">
       <form>
         <input class="name" type="text" placeholder="Enter your name" />
         <select class="options">
@@ -25,7 +25,7 @@ document.querySelector("#app").innerHTML = `
           <option value="2">Option 2</option>
         </select>
         <input type="number" class="delay" placeholder="Enter delay (sec)"/>
-        <button type="submit" class="btn add-btn">Submit</button>
+        <button type="submit" class="btn add-btn">Add</button>
       </form>
       <div class="spinner"></div>
       <div class="success message">Successfully added.</div>
@@ -41,6 +41,7 @@ document.querySelector("#app").innerHTML = `
         <tbody class="table-body"></tbody>
       </table>
   </div>
+
 `;
 
 // DOM elements
@@ -71,6 +72,6 @@ $(document).ready(function () {
 });
 
 $(document).on("click", ".delete-btn", function () {
-  $(this).closest("tr").remove();
-  deleteData($(this).closest("tr").attr("id"));
+  const closestElement = $(this).closest("tr");
+  deleteData(closestElement);
 });
