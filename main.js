@@ -24,6 +24,8 @@ document.querySelector("#app").innerHTML = `
         <button type="submit" class="btn add-btn">Submit</button>
       </form>
       <div class="spinner"></div>
+      <div class="success message">Successfully added.</div>
+      <div class="error message">Oops. Something went wrong!</div>
       <table class="table">
         <thead class="table-head">
           <tr>
@@ -38,6 +40,8 @@ document.querySelector("#app").innerHTML = `
 `;
 
 const spinner = $(".spinner");
+const successMessage = $(".success");
+const errorMessage = $(".error");
 
 $(document).ready(function () {
   $(".add-btn").click(async function (e) {
@@ -48,10 +52,21 @@ $(document).ready(function () {
     if (name == "" || option == "") {
       alert("Please fill in all fields");
     } else {
-      spinner.show();
-      await new Promise((resolve) => setTimeout(resolve, delay * 1000));
-      spinner.hide();
-      writeUserData(name, option);
+      try {
+        spinner.show();
+        await new Promise((resolve) => setTimeout(resolve, delay * 1000));
+        spinner.hide();
+        writeUserData(name, option);
+        successMessage.fadeIn(1000);
+        setTimeout(() => {
+          successMessage.fadeOut(1000);
+        }, 3000);
+      } catch (error) {
+        errorMessage.fadeIn(1000);
+        setTimeout(() => {
+          errorMessage.fadeOut(1000);
+        }, 3000);
+      }
     }
   });
 });

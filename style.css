@@ -68,3 +68,20 @@ html {
     transform: rotate(360deg);
   }
 }
+
+.message {
+  text-align: center;
+  color: white;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  border-radius: 1rem;
+  display: none;
+}
+
+.success {
+  background-color: #4caf50;
+}
+
+.error {
+  background-color: #ff5733;
+}
