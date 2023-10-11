@@ -13,7 +13,6 @@ onValue(starCountRef, (snapshot) => {
 
 document.querySelector("#app").innerHTML = `
 <div class="container">
-    <div>
       <form>
         <input class="name" type="text" placeholder="Enter your name" />
         <select class="options">
@@ -24,6 +23,7 @@ document.querySelector("#app").innerHTML = `
         <input type="number" class="delay" placeholder="Enter delay (sec)"/>
         <button type="submit" class="btn add-btn">Submit</button>
       </form>
+      <div class="spinner"></div>
       <table class="table">
         <thead class="table-head">
           <tr>
@@ -34,9 +34,10 @@ document.querySelector("#app").innerHTML = `
         </thead>
         <tbody class="table-body"></tbody>
       </table>
-    </div>
   </div>
 `;
+
+const spinner = $(".spinner");
 
 $(document).ready(function () {
   $(".add-btn").click(async function (e) {
@@ -47,7 +48,9 @@ $(document).ready(function () {
     if (name == "" || option == "") {
       alert("Please fill in all fields");
     } else {
+      spinner.show();
       await new Promise((resolve) => setTimeout(resolve, delay * 1000));
+      spinner.hide();
       writeUserData(name, option);
     }
   });
