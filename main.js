@@ -5,6 +5,7 @@ import { database } from "./scripts/config";
 import { renderTable } from "./scripts/renderTable";
 import { deleteData } from "./scripts/deleteData";
 import { clearInputFields } from "./scripts/clearInputFields";
+import { showMessage } from "./scripts/showMessage";
 
 // Get data from Firebase
 const starCountRef = ref(database, "users/");
@@ -44,8 +45,6 @@ document.querySelector("#app").innerHTML = `
 
 // DOM elements
 const spinner = $(".spinner");
-const successMessage = $(".success");
-const errorMessage = $(".error");
 
 // Event listeners
 $(document).ready(function () {
@@ -54,7 +53,7 @@ $(document).ready(function () {
     let name = $(".name").val();
     let option = $(".options").val();
     let delay = $(".delay").val();
-    if (name == "" || option == "") {
+    if (name == "" || option == "" || delay == "") {
       alert("Please fill in all fields");
     } else {
       clearInputFields();
@@ -63,15 +62,9 @@ $(document).ready(function () {
         await new Promise((resolve) => setTimeout(resolve, delay * 1000));
         spinner.hide();
         writeUserData(name, option);
-        successMessage.fadeIn(1000);
-        setTimeout(() => {
-          successMessage.fadeOut(1000);
-        }, 3000);
+        showMessage("success");
       } catch (error) {
-        errorMessage.fadeIn(1000);
-        setTimeout(() => {
-          errorMessage.fadeOut(1000);
-        }, 3000);
+        showMessage("error");
       }
     }
   });
