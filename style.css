@@ -1,0 +1,91 @@
+html {
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container form {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.table {
+  border: 1px solid black;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 70%;
+}
+
+.table thead {
+  border: 1px solid black;
+}
+
+.table td {
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.btn {
+  border: none;
+  border-radius: 2rem;
+  color: white;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+.add-btn {
+  background-color: green;
+}
+
+.delete-btn {
+  background-color: red;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  display: none;
+  margin: 1rem 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.message {
+  text-align: center;
+  color: white;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  border-radius: 1rem;
+  display: none;
+}
+
+.success {
+  background-color: #4caf50;
+}
+
+.error {
+  background-color: #ff5733;
+}
+
+.no-data {
+  text-align: center;
+}
