@@ -10,7 +10,7 @@ document.querySelector("#app").innerHTML = `
           <option value="1">Option 1</option>
           <option value="2">Option 2</option>
         </select>
-        <button type="submit" class="submit-btn">Submit</button>
+        <button type="submit" class="btn add-btn">Submit</button>
       </form>
       <table class="table">
         <thead class="table-head">
@@ -26,7 +26,7 @@ document.querySelector("#app").innerHTML = `
 `;
 
 $(document).ready(function () {
-  $(".submit-btn").click(function (e) {
+  $(".add-btn").click(function (e) {
     e.preventDefault();
     let name = $(".name").val();
     let option = $(".options").val();
@@ -40,7 +40,7 @@ $(document).ready(function () {
             <td>${name}</td>
             <td>${option}</td>
             <td>
-              <button class="delete">Delete</button>
+              <button class="btn delete-btn">Delete</button>
             </td>
           </tr>`
       );
@@ -50,6 +50,6 @@ $(document).ready(function () {
   });
 });
 
-$(document).on("click", ".delete", function () {
+$(document).on("click", ".delete-btn", function () {
   $(this).closest("tr").remove();
 });
