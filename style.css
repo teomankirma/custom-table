@@ -85,3 +85,7 @@ html {
 .error {
   background-color: #ff5733;
 }
+
+.no-data {
+  text-align: center;
+}
