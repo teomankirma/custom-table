@@ -1,17 +1,19 @@
 import "./style.css";
 import { writeUserData } from "./scripts/writeUserData";
-import { ref, onValue, remove } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { database } from "./scripts/config";
 import { renderTable } from "./scripts/renderTable";
 import { deleteData } from "./scripts/deleteData";
 import { clearInputFields } from "./scripts/clearInputFields";
 
+// Get data from Firebase
 const starCountRef = ref(database, "users/");
 onValue(starCountRef, (snapshot) => {
   const data = snapshot.val();
   renderTable(data);
 });
 
+// Render HTML
 document.querySelector("#app").innerHTML = `
 <div class="container">
       <form>
@@ -40,10 +42,12 @@ document.querySelector("#app").innerHTML = `
   </div>
 `;
 
+// DOM elements
 const spinner = $(".spinner");
 const successMessage = $(".success");
 const errorMessage = $(".error");
 
+// Event listeners
 $(document).ready(function () {
   $(".add-btn").click(async function (e) {
     e.preventDefault();

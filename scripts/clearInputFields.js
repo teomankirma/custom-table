@@ -1,5 +1,5 @@
 export const clearInputFields = () => {
-  $(".name").val();
-  $(".options").val();
-  $(".delay").val();
+  $(".name").val("");
+  $(".options").val("");
+  $(".delay").val("");
 };
