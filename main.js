@@ -1,4 +1,27 @@
 import "./style.css";
+import { writeUserData } from "./writeUserData";
+import { ref, onValue, remove } from "firebase/database";
+import { database } from "./config";
+
+const starCountRef = ref(database, "users/");
+onValue(starCountRef, (snapshot) => {
+  const data = snapshot.val();
+  renderTable(data);
+});
+
+const renderTable = (data) => {
+  const table = $(".table-body");
+  table.empty();
+  for (let key in data) {
+    table.append(`
+      <tr id=${data[key].userId}>
+        <td>${data[key].name}</td>
+        <td>${data[key].option}</td>
+        <td><button class="btn delete-btn">Delete</button></td>
+      </tr>
+    `);
+  }
+};
 
 document.querySelector("#app").innerHTML = `
 <div class="container">
@@ -20,6 +43,7 @@ document.querySelector("#app").innerHTML = `
             <th>Action</th>
           </tr>
         </thead>
+        <tbody class="table-body"></tbody>
       </table>
     </div>
   </div>
@@ -33,23 +57,19 @@ $(document).ready(function () {
     if (name == "" || option == "") {
       alert("Please fill in all fields");
     } else {
-      const currentContent = $(".table").html();
-      $(".table").html(
-        currentContent +
-          `<tr>
-            <td>${name}</td>
-            <td>${option}</td>
-            <td>
-              <button class="btn delete-btn">Delete</button>
-            </td>
-          </tr>`
-      );
-      $(".name").val("");
-      $(".options").val("");
+      writeUserData(name, option);
     }
   });
 });
 
+const deleteData = (id) => {
+  remove(ref(database, "users/" + id));
+};
+
 $(document).on("click", ".delete-btn", function () {
   $(this).closest("tr").remove();
+  const deleteData = (id) => {
+    remove(ref(database, "users/" + id));
+    deleteData($(this).closest("tr").attr("id"));
+  };
 });
