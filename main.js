@@ -21,6 +21,7 @@ document.querySelector("#app").innerHTML = `
           <option value="1">Option 1</option>
           <option value="2">Option 2</option>
         </select>
+        <input type="number" class="delay" placeholder="Enter delay (sec)"/>
         <button type="submit" class="btn add-btn">Submit</button>
       </form>
       <table class="table">
@@ -38,13 +39,15 @@ document.querySelector("#app").innerHTML = `
 `;
 
 $(document).ready(function () {
-  $(".add-btn").click(function (e) {
+  $(".add-btn").click(async function (e) {
     e.preventDefault();
     let name = $(".name").val();
     let option = $(".options").val();
+    let delay = $(".delay").val();
     if (name == "" || option == "") {
       alert("Please fill in all fields");
     } else {
+      await new Promise((resolve) => setTimeout(resolve, delay * 1000));
       writeUserData(name, option);
     }
   });
