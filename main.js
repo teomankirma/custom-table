@@ -4,6 +4,7 @@ import { ref, onValue, remove } from "firebase/database";
 import { database } from "./scripts/config";
 import { renderTable } from "./scripts/renderTable";
 import { deleteData } from "./scripts/deleteData";
+import { clearInputFields } from "./scripts/clearInputFields";
 
 const starCountRef = ref(database, "users/");
 onValue(starCountRef, (snapshot) => {
@@ -52,6 +53,7 @@ $(document).ready(function () {
     if (name == "" || option == "") {
       alert("Please fill in all fields");
     } else {
+      clearInputFields();
       try {
         spinner.show();
         await new Promise((resolve) => setTimeout(resolve, delay * 1000));
